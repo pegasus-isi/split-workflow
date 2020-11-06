@@ -158,8 +158,7 @@ if __name__ == "__main__":
 
     if not args.skip_sites_catalog:
         print("Creating workflow properties...")
-        workflow.create_pegasus_properties()
-        
+        workflow.create_pegasus_properties()   
         print("Creating execution sites...")
         workflow.create_sites_catalog(args.execution_site_name)
 
