@@ -31,9 +31,10 @@ class SplitWorkflow:
     def write(self):
         if not self.sc is None:
             self.sc.write()
+        if not self.props is None:
+            self.props.write()
         self.tc.write()
         self.rc.write()
-        self.props.write()
         self.wf.write()
 
     # --- Configuration (Pegasus Properties) ----------------------------------
@@ -155,9 +156,10 @@ if __name__ == "__main__":
 
     workflow = SplitWorkflow(args.output)
 
-    print("Creating workflow properties...")
-    workflow.create_pegasus_properties()
     if not args.skip_sites_catalog:
+        print("Creating workflow properties...")
+        workflow.create_pegasus_properties()
+        
         print("Creating execution sites...")
         workflow.create_sites_catalog(args.execution_site_name)
 
