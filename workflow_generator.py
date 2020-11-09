@@ -31,8 +31,7 @@ class SplitWorkflow:
     def write(self):
         if not self.sc is None:
             self.sc.write()
-        if not self.props is None:
-            self.props.write()
+        self.props.write()
         self.tc.write()
         self.rc.write()
         self.wf.write()
@@ -109,7 +108,7 @@ class SplitWorkflow:
         # we do a parmeter sweep on the first 4 chunks created
         for c in "abcd":
             part = File("part.%s" % c)
-            split.add_outputs(part, register_replica=False)
+            split.add_outputs(part, stage_out=True, register_replica=True)
 
             count = File("count.txt.%s" % c)
 
@@ -117,7 +116,7 @@ class SplitWorkflow:
                 Job("wc")
                 .add_args("-l", part)
                 .add_inputs(part)
-                .set_stdout(count, register_replica=False)
+                .set_stdout(count, stage_out=True, register_replica=True)
                 .add_pegasus_profile(label="p1")
             )
 
@@ -157,11 +156,12 @@ if __name__ == "__main__":
     workflow = SplitWorkflow(args.output)
 
     if not args.skip_sites_catalog:
-        print("Creating workflow properties...")
-        workflow.create_pegasus_properties()   
         print("Creating execution sites...")
         workflow.create_sites_catalog(args.execution_site_name)
 
+    print("Creating workflow properties...")
+    workflow.create_pegasus_properties()   
+    
     print("Creating transformation catalog...")
     workflow.create_transformation_catalog(args.execution_site_name)
 
