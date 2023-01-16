@@ -4,7 +4,7 @@
 - Pegasus v5.0+
 - Python 3.6+
 
-![Split](https://user-images.githubusercontent.com/36110304/210929372-836122dc-d7cc-468f-80ce-7cf175f4e72a.png)
+![split-workflow](https://user-images.githubusercontent.com/36110304/212753610-843a44c9-9703-4dd1-9e50-86bd2a4deba7.png)
 
 # File Description
 
